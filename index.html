@@ -116,9 +116,8 @@
                 <label for="name">Name as per SSLC Markscard:</label>
                 <input type="text" id="name" name="name" placeholder="Enter your name as per SSLC" required>
                 
-                <!-- Register Number Field -->
                 <label for="registerNumber">Register Number:</label>
-                <input type="text" id="registerNumber" name="registerNumber" placeholder="Enter your register number" required>
+                <input type="text" id="registerNumber" name="registerNumber" placeholder="Enter your register number" required oninput="this.value = this.value.toUpperCase()">
                 
                 <!-- Branch Dropdown Field -->
                 <label for="branch">Branch:</label>
