@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e5e5e5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        header {
+            background-color: #14213d;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            max-width: 70px; /* Adjust the size of the logo */
+            margin-right: 15px; /* Space between logo and title */
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+            color: white;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #fca311;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #a0680e;
+        }
+
+        footer {
+            background-color: #fca311;
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo"> <!-- Replace with your logo URL -->
+        <h1>Anjuman-E-Islam Polytechnic, Gadag</h1>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>Independence Day Certificate</h2>
+            <form id="certificateForm">
+                <!-- Name Field -->
+                <label for="name">Name as per SSLC Markscard:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name as per SSLC" required>
+                
+                <!-- Register Number Field -->
+                <label for="registerNumber">Register Number:</label>
+                <input type="text" id="registerNumber" name="registerNumber" placeholder="Enter your register number" required>
+                
+                <!-- Branch Dropdown Field -->
+                <label for="branch">Branch:</label>
+                <select id="branch" name="branch" required>
+                    <option value="">Select your branch</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Electronics And Communication">Electronics And Communication</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Civil Engineering(GL)">Civil Engineering(GL)</option>
+                    <option value="Civil Engineering(PHE)">Civil Engineering(PHE)</option>
+                    <option value="Electrical and Electronics">Electrical and Electronics</option>
+                </select>
+                
+                <!-- Email Field -->
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                
+                <!-- Submit Button -->
+                <button type="submit">Generate Certificate</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Certificate Generator. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('certificateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/generate-certificate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                alert('Certificate sent to your email!');
+            } else {
+                alert('There was an error generating your certificate.');
+            }
+        });
+    </script>
+</body>
+</html>
